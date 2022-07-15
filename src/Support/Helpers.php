@@ -2,8 +2,8 @@
 
 namespace Okra\Support;
 
-use ReflectionException;
-use ReflectionProperty;
+use DateTime;
+use Okra\Exceptions\InvalidRequestDataException;
 use stdClass;
 
 class Helpers
@@ -30,7 +30,7 @@ class Helpers
     public static function arrayToObject(array $subject, object $object): object
     {
         foreach ($subject as $key => $value) {
-            if (is_array($value) && self::arrayIsAssoc($value)) {
+            if (is_array($value) && self::assertArrayIsAssoc($value)) {
                 $object->{$key} = new stdClass();
                 self::arrayToObject($value, $object->$key);
             } else {
@@ -47,7 +47,7 @@ class Helpers
      * @param  array  $array
      * @return bool
      */
-    public static function arrayIsAssoc(array $array): bool
+    public static function assertArrayIsAssoc(array $array): bool
     {
         $keys = array_keys($array);
 
@@ -60,7 +60,7 @@ class Helpers
      * @param array $array
      * @return bool
      */
-    public static function arrayIsMultiDimensional(array $array): bool
+    public static function assertArrayIsMultiDimensional(array $array): bool
     {
         $rv = array_filter($array, 'is_array');
 
@@ -68,18 +68,19 @@ class Helpers
     }
 
     /**
-     * @param string $className
-     * @param string $propertyName
-     * @return string|null
-     * @throws ReflectionException
+     * Assert that a string is a valid date.
+     *
+     * @param string $date
+     * @param string $format
+     * @return void
+     * @throws InvalidRequestDataException
      */
-    public static function getPropertyTypeFromAnnotation(string $className, string $propertyName): ?string
+    public static function assertStringIsDate(string $date, string $format = 'Y-m-d'): void
     {
-        $rp = new ReflectionProperty($className, $propertyName);
-        if (preg_match('/@var\s+([^\s]+)/', $rp->getDocComment(), $matches)) {
-            return $matches[1];
-        }
+        $d = DateTime::createFromFormat($format, $date);
 
-        return null;
+        if (false === ($d && ($d->format($format) === $date))) {
+            throw new InvalidRequestDataException("The provided string [$date] is not a valid date.");
+        }
     }
 }

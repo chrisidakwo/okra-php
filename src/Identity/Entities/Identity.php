@@ -6,6 +6,8 @@ use Okra\Support\Entities\Customer;
 use Okra\Support\Entities\Entity;
 use Okra\Support\Entities\Owner;
 use Okra\Support\Entities\Photo;
+use Okra\Support\Entities\SmileIdentity;
+use stdClass;
 
 class Identity extends Entity
 {
@@ -26,30 +28,30 @@ class Identity extends Entity
     /**
      * The first name of the account owner.
      *
-     * @var string $firstname
+     * @var string|null $firstname
      */
-    public string $firstname;
+    public ?string $firstname;
 
     /**
      * The middlename name of the account owner.
      *
-     * @var string $middlename
+     * @var string|null $middlename
      */
-    public string $middlename;
+    public ?string $middlename;
 
     /**
      * The last name of the account owner.
      *
-     * @var string $lastname
+     * @var string|null $lastname
      */
-    public string $lastname;
+    public ?string $lastname;
 
     /**
      * The full name of the owner, as provided by the bank.
      *
-     * @var string $fullname
+     * @var string|null $fullname
      */
-    public string $fullname;
+    public ?string $fullname;
 
     /**
      * The account owner person's closest living relative(s) as returned from the bank.
@@ -61,9 +63,9 @@ class Identity extends Entity
     /**
      * The date of birth of the account owner, as provided by the bank..
      *
-     * @var string $dob
+     * @var string|null $dob
      */
-    public string $dob;
+    public ?string $dob;
 
     /**
      * @var bool $verified
@@ -74,9 +76,9 @@ class Identity extends Entity
      * Okra's level of confidence that the source is actually an income.
      * We return one of the following enum values: HIGH, MEDIUM.
      *
-     * @var string $score
+     * @var string|null $score
      */
-    public string $score;
+    public ?string $score;
 
     /**
      * @var string|null $dti
@@ -121,14 +123,14 @@ class Identity extends Entity
     /**
      * Data returned by the financial institution about the account owner or owners.
      *
-     * @var Owner[]|null $owners
+     * @var Owner[]|null $owner
      */
-    public ?array $owners;
+    public ?array $owner;
 
     /**
-     * @var array|null $record
+     * @var array|null|string $record
      */
-    public ?array $record;
+    public $record;
 
     /**
      * @var array $aliases
@@ -143,9 +145,9 @@ class Identity extends Entity
     /**
      * The bank verification number of the user.
      *
-     * @var string $bvn
+     * @var string|null $bvn
      */
-    public string $bvn;
+    public ?string $bvn;
 
     /**
      * @var bool|null $bvnUpdated
@@ -187,9 +189,9 @@ class Identity extends Entity
     /**
      * The gender of the account owner.
      *
-     * @var string $gender
+     * @var string|null $gender
      */
-    public string $gender;
+    public ?string $gender;
 
     /**
      * @var string|null $mothersMaiden
@@ -207,6 +209,16 @@ class Identity extends Entity
      * @var bool|null $smileId;
      */
     public ?bool $smileId;
+
+    /**
+     * @var SmileIdentity|stdClass|null $smileIdentity
+     */
+    public $smileIdentity;
+
+    /**
+     * @var bool|null $paystackId
+     */
+    public ?bool $paystackId;
 
     /**
      * @var string|null $levelOfAccount
@@ -283,4 +295,34 @@ class Identity extends Entity
      * @var string $lastUpdated
      */
     public string $lastUpdated;
+
+    /**
+     * @var array|null $metadata
+     */
+    public ?array $metadata;
+
+    /**
+     * @var bool|null $merged
+     */
+    public ?bool $merged;
+
+    /**
+     * @var bool|null $fbnFix
+     */
+    public ?bool $fbnFix;
+
+    /**
+     * @var array|null $mergedIds
+     */
+    public ?array $mergedIds;
+
+    /**
+     * @var string[]|null
+     */
+    public ?array $projects;
+
+    /**
+     * @var string|null $verificationCountry
+     */
+    public ?string $verificationCountry;
 }

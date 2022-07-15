@@ -1,11 +1,11 @@
 <?php
 
-namespace Okra\Identity\FetchIdentities;
+namespace Okra\Identity\GetIdentityByDate;
 
 use Okra\Http\Response\HttpResponse;
 use Okra\Identity\Traits\HasIdentityResponse;
 
-class FetchIdentitiesResponse extends HttpResponse
+class GetIdentityByDateResponse extends HttpResponse
 {
     use HasIdentityResponse;
 }

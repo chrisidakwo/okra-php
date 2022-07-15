@@ -16,6 +16,14 @@ use Okra\Identity\GetIdentityById\GetIdentityResponse;
 trait Identity
 {
     /**
+     * <p>The endpoint allows you retrieve various account holder information on file with the bank, including names,
+     * emails, phone numbers, and addresses.</p>
+     *
+     * <br>
+     * <p><strong>Note:</strong> This request may take some time to complete if identity was not specified as an
+     * initial product when creating the Record. This is because Okra must communicate directly with the institution
+     * to retrieve the data.</p>
+     *
      * @return array
      * @throws GuzzleException|JsonException
      */
@@ -27,6 +35,9 @@ trait Identity
     }
 
     /**
+     * This endpoint allows you retrieve various account holder information on file with the financial institution,
+     * including names, emails, phone numbers, and addresses etc., by passing the id params.
+     *
      * @param string $id
      * @param int $limit
      * @param string|null $page
@@ -41,6 +52,9 @@ trait Identity
     }
 
     /**
+     * This endpoint allows you retrieve various account holder information on file with the financial institution,
+     * including names, emails, phone numbers, and addresses etc., by passing the `customer id`.
+     *
      * @param string $customerId
      * @param int $limit
      * @param string|null $page
@@ -57,6 +71,14 @@ trait Identity
     }
 
     /**
+     * <p>BVN means Bank Verification Number.<br>
+     * It is a unique identity given to users that can be verified across the Nigerian Banking Industry.</p>
+     *
+     * <br>
+     * <p>This endpoint allows you Lookup BVN and get detailed information on the BVN Identity.</p>
+     *
+     * <br>
+     * <p><strong>NOTE -</strong> This endpoint is only available for Nigerians.</p>
      * @param string $bvn
      * @return array
      * @throws GuzzleException|JsonException

@@ -13,10 +13,10 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     {
         parent::setUp();
 
-        if (!getenv('BASE_URL')) {
+        if (!getenv('OKRA_BASE_URL')) {
             Dotenv::createUnsafeImmutable(dirname(__FILE__, 2))->load();
         }
 
-        $this->okra = new Okra(getenv('SECRET_KEY'), getenv('BASE_URL'));
+        $this->okra = new Okra(getenv('OKRA_SECRET_KEY'), getenv('OKRA_BASE_URL'));
     }
 }

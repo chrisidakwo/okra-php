@@ -21,12 +21,14 @@ class Entity
         $classProperties = $reflectionClass->getProperties();
 
         foreach ($classProperties as $classProperty) {
-            $value = $properties[Helpers::toSnakeCase($classProperty->getName())] ?? null;
+            $value = $properties[Helpers::toSnakeCase($classProperty->getName())]
+                ?? $properties[$classProperty->getName()]
+                ?? null;
 
-            if (is_array($value) && Helpers::arrayIsAssoc($value)) {
+            if (is_array($value) && Helpers::assertArrayIsAssoc($value)) {
                 $object = new stdClass;
                 $value = Helpers::arrayToObject($value, $object);
-            } elseif (is_array($value) && Helpers::arrayIsMultiDimensional($value)) {
+            } elseif (is_array($value) && Helpers::assertArrayIsMultiDimensional($value)) {
                 $object = new stdClass;
                 foreach (array_values($value) as $newValue) {
                     $return[] = Helpers::arrayToObject(array_values($newValue), $object);

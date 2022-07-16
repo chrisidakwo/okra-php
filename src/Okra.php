@@ -3,6 +3,7 @@
 namespace Okra;
 
 use GuzzleHttp\Client;
+use Okra\Bank\Bank;
 use Okra\Exceptions\InvalidBaseUrl;
 use Okra\Exceptions\InvalidSecretKey;
 use Okra\Http\Client\AnonymousHttpClient;
@@ -11,7 +12,7 @@ use Okra\Identity\Identity;
 
 class Okra
 {
-    use Identity;
+    use Identity, Bank;
 
     private AuthenticatedHttpClient $authenticatedHttpClient;
     private AnonymousHttpClient $anonymousHttpClient;

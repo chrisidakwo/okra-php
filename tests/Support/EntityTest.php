@@ -3,7 +3,7 @@
 namespace Okra\Tests\Support;
 
 use Okra\Support\Entities\Entity;
-use Okra\Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class EntityTest extends TestCase
 {

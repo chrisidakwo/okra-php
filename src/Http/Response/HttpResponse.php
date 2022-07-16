@@ -26,9 +26,23 @@ class HttpResponse implements HttpResponseContract
         $response = (array) Utils::jsonDecode($this->response, true, 512, JSON_THROW_ON_ERROR);
 
         if ($response['status'] === 'error') {
+            $errorMessage = 'Ensure that the credentials are right and request data is properly formed.';
+
+            if (array_key_exists('message', $response)) {
+                $errorMessage = $response['message'];
+            } elseif (array_key_exists('data', $response)) {
+                if (count($response['data']['message'])) {
+                    $errorMessage = implode(' | ', $response['data']['message']);
+                } elseif (array_key_exists('method', $response['data']) && false === empty($response['data']['method'])) {
+                    $method = $response['data']['method'];
+
+                    $errorMessage = "Error: $method";
+                }
+            }
+
             throw new RequestFailed(
                 $response,
-                '[Okra] Received an error response. Ensure that the credentials are right and request data is properly formed.',
+                "[Okra] Received an error response. $errorMessage",
                 400,
             );
         }

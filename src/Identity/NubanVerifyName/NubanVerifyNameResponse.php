@@ -1,18 +1,18 @@
 <?php
 
-namespace Okra\Identity\BvnVerify;
+namespace Okra\Identity\NubanVerifyName;
 
 use JsonException;
 use Okra\Http\Response\HttpResponse;
 use Okra\Identity\Entities\Identity;
 
-class BvnVerifyResponse extends HttpResponse
+class NubanVerifyNameResponse extends HttpResponse
 {
     /**
      * @return Identity
      * @throws JsonException
      */
-    public function getBvnIdentity(): Identity
+    public function getNubanIdentity(): Identity
     {
         $data = $this->getResponse()['data'];
 

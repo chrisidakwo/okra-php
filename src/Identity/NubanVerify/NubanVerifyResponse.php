@@ -2,7 +2,7 @@
 
 namespace Okra\Identity\NubanVerify;
 
-use JsonException;
+use GuzzleHttp\Exception\InvalidArgumentException;
 use Okra\Http\Response\HttpResponse;
 use Okra\Identity\Entities\Identity;
 
@@ -10,7 +10,7 @@ class NubanVerifyResponse extends HttpResponse
 {
     /**
      * @return Identity
-     * @throws JsonException
+     * @throws InvalidArgumentException
      */
     public function getNubanIdentity(): Identity
     {

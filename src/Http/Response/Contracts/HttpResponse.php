@@ -2,14 +2,14 @@
 
 namespace Okra\Http\Response\Contracts;
 
-use JsonException;
+use GuzzleHttp\Exception\InvalidArgumentException;
 use Okra\Exceptions\RequestFailed;
 
 interface HttpResponse
 {
     /**
      * @return array
-     * @throws JsonException|RequestFailed
+     * @throws RequestFailed|InvalidArgumentException
      */
     public function getResponse(): array;
 }

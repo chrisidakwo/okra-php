@@ -2,15 +2,16 @@
 
 namespace Okra\Bank\GetBankById;
 
-use JsonException;
+use GuzzleHttp\Exception\InvalidArgumentException;
 use Okra\Bank\Entities\Bank;
+use Okra\Exceptions\RequestFailed;
 use Okra\Http\Response\HttpResponse;
 
 class GetBankByIdResponse extends HttpResponse
 {
     /**
      * @return Bank
-     * @throws JsonException
+     * @throws RequestFailed|InvalidArgumentException
      */
     public function getBank(): Bank
     {

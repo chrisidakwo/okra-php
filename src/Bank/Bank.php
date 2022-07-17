@@ -2,12 +2,11 @@
 
 namespace Okra\Bank;
 
-use GuzzleHttp\Exception\GuzzleException;
-use JsonException;
 use Okra\Bank\GetBankById\GetBankByIdRequest;
 use Okra\Bank\GetBankById\GetBankByIdResponse;
 use Okra\Bank\GetListOfBanks\GetListOfBanksRequest;
 use Okra\Bank\GetListOfBanks\GetListOfBanksResponse;
+use Okra\Exceptions\RequestFailed;
 
 trait Bank
 {
@@ -15,7 +14,7 @@ trait Bank
      * This endpoint allows you retrieve the list of all institutions currently supported by Okra.
      *
      * @return Entities\Bank[]|array
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function getListOfBanks(): array
     {
@@ -29,7 +28,7 @@ trait Bank
      *
      * @param string $bankId
      * @return Entities\Bank
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function getBankById(string $bankId): Entities\Bank
     {

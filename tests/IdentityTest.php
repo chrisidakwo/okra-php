@@ -2,8 +2,6 @@
 
 namespace Okra\Tests;
 
-use GuzzleHttp\Exception\GuzzleException;
-use JsonException;
 use Okra\Exceptions\RequestFailed;
 use Okra\Identity\Entities\CompanyVerification;
 use Okra\Identity\Entities\Identity;
@@ -12,7 +10,7 @@ use stdClass;
 class IdentityTest extends TestCase
 {
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItCanFetchIdentities(): void
     {
@@ -23,7 +21,7 @@ class IdentityTest extends TestCase
     }
 
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItCanGetIdentityByTheId(): void
     {
@@ -34,7 +32,7 @@ class IdentityTest extends TestCase
     }
 
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItVerifiesBvn(): void
     {
@@ -48,7 +46,7 @@ class IdentityTest extends TestCase
     }
 
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItCanGetIdentityByDateRange(): void
     {
@@ -67,7 +65,7 @@ class IdentityTest extends TestCase
     }
 
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItCanVerifyCustomer(): void
     {
@@ -80,7 +78,7 @@ class IdentityTest extends TestCase
     }
 
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItCanVerifyACompanyWithRCNumber(): void
     {
@@ -94,7 +92,7 @@ class IdentityTest extends TestCase
     }
 
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testCompanyCanBeVerifiedWithRcNumberAndTinNumber(): void
     {
@@ -105,7 +103,7 @@ class IdentityTest extends TestCase
     }
 
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItHandlesIncorrectTin(): void
     {
@@ -116,7 +114,7 @@ class IdentityTest extends TestCase
     }
 
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItVerifiesNuban(): void
     {
@@ -129,7 +127,7 @@ class IdentityTest extends TestCase
     }
 
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItVerifiesNubanAndReturnsOnlyNameProperties(): void
     {

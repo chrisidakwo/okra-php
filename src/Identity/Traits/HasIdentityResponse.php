@@ -2,7 +2,6 @@
 
 namespace Okra\Identity\Traits;
 
-use JsonException;
 use Okra\Exceptions\RequestFailed;
 use Okra\Identity\Entities\Identity;
 use Okra\Support\Entities\Pagination;
@@ -11,7 +10,7 @@ trait HasIdentityResponse
 {
     /**
      * @return array|null
-     * @throws JsonException
+     * @throws RequestFailed
      */
     public function getIdentities(): ?array
     {
@@ -35,7 +34,7 @@ trait HasIdentityResponse
      * Return original response array with identity data mapped to the Identity entity.
      *
      * @return array
-     * @throws JsonException|RequestFailed
+     * @throws RequestFailed
      */
     public function getResponse(): array
     {

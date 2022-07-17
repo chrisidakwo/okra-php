@@ -2,7 +2,8 @@
 
 namespace Okra\Identity\VerifyCustomer;
 
-use JsonException;
+use GuzzleHttp\Exception\InvalidArgumentException;
+use Okra\Exceptions\RequestFailed;
 use Okra\Http\Response\HttpResponse;
 use Okra\Identity\Entities\Identity;
 
@@ -10,7 +11,7 @@ class VerifyCustomerResponse extends HttpResponse
 {
     /**
      * @return Identity
-     * @throws JsonException
+     * @throws RequestFailed|InvalidArgumentException
      */
     public function getCustomerIdentity(): Identity
     {

@@ -2,14 +2,13 @@
 
 namespace Okra\Tests;
 
-use GuzzleHttp\Exception\GuzzleException;
-use JsonException;
 use Okra\Bank\Entities\Bank;
+use Okra\Exceptions\RequestFailed;
 
 class BankTest extends TestCase
 {
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItRetrievesAListOfBanks(): void
     {
@@ -20,7 +19,7 @@ class BankTest extends TestCase
     }
 
     /**
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function testItRetriesBankFromId(): void
     {

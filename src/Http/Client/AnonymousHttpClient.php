@@ -3,7 +3,10 @@
 namespace Okra\Http\Client;
 
 use GuzzleHttp\Client as GuzzleHttpClient;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Utils;
+use Okra\Exceptions\RequestFailed;
 use Okra\Http\Request\Contracts\HttpGetRequest;
 use Okra\Http\Request\Contracts\HttpPostRequest;
 
@@ -24,13 +27,17 @@ class AnonymousHttpClient implements HttpClient
      */
     public function post(HttpPostRequest $request): string
     {
-        $requestBody = json_encode($request->getBody(), JSON_THROW_ON_ERROR);
+        try {
+            $response = $this->http->post($request->getUrl(), [
+                'body' => $request->getBody()
+            ]);
 
-        $response = $this->http->post($request->getUrl(), [
-            'body' => $requestBody
-        ]);
+            return Utils::jsonEncode(Utils::jsonDecode($response->getBody(), true, 512, JSON_PRETTY_PRINT));
+        } catch (GuzzleException|ClientException $exception) {
+            $response = Utils::jsonDecode($exception->getResponse()->getBody());
 
-        return Utils::jsonEncode(Utils::jsonDecode($response->getBody(), true, 512, JSON_PRETTY_PRINT));
+            throw new RequestFailed($response, sprintf('[Okra - %s] %s', $request->getUrl(), $response->message));
+        }
     }
 
     /**
@@ -38,9 +45,15 @@ class AnonymousHttpClient implements HttpClient
      */
     public function get(HttpGetRequest $request): string
     {
-        $response = $this->http->get($request->getUrl());
+        try {
+            $response = $this->http->get($request->getUrl());
 
-        return Utils::jsonEncode(Utils::jsonDecode($response->getBody(), true, 512, JSON_PRETTY_PRINT));
+            return Utils::jsonEncode(Utils::jsonDecode($response->getBody(), true, 512, JSON_PRETTY_PRINT));
+        } catch (GuzzleException|ClientException $exception) {
+            $response = Utils::jsonDecode($exception->getResponse()->getBody());
+
+            throw new RequestFailed($response, sprintf('[Okra - %s] %s', $request->getUrl(), $response->message));
+        }
     }
 
     /**

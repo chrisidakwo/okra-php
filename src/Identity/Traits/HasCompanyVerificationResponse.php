@@ -2,14 +2,15 @@
 
 namespace Okra\Identity\Traits;
 
-use JsonException;
+use GuzzleHttp\Exception\InvalidArgumentException;
+use Okra\Exceptions\RequestFailed;
 use Okra\Identity\Entities\CompanyVerification;
 
 trait HasCompanyVerificationResponse
 {
     /**
      * @return CompanyVerification
-     * @throws JsonException
+     * @throws RequestFailed|InvalidArgumentException
      */
     public function getCompanyVerification(): CompanyVerification
     {

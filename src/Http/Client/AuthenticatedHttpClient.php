@@ -3,6 +3,7 @@
 namespace Okra\Http\Client;
 
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Utils;
 use Okra\Exceptions\RequestFailed;
 use Okra\Http\Request\Contracts\HttpGetRequest;
@@ -59,7 +60,7 @@ class AuthenticatedHttpClient implements HttpClient
             $response = $this->http->getHttpClient()->post($request->getUrl(), $options);
 
             return Utils::jsonEncode(Utils::jsonDecode($response->getBody(), true, 512, JSON_PRETTY_PRINT));
-        } catch (ClientException $exception) {
+        } catch (GuzzleException|ClientException $exception) {
             $response = Utils::jsonDecode($exception->getResponse()->getBody());
 
             throw new RequestFailed($response, sprintf('[Okra - %s] %s', $request->getUrl(), $response->message));
@@ -79,7 +80,7 @@ class AuthenticatedHttpClient implements HttpClient
             ]);
 
             return Utils::jsonEncode(Utils::jsonDecode($response->getBody(), true, 512, JSON_PRETTY_PRINT));
-        } catch (ClientException $exception) {
+        } catch (GuzzleException|ClientException $exception) {
             $response = Utils::jsonDecode($exception->getResponse()->getBody());
 
             throw new RequestFailed($response, sprintf('[Okra - %s] %s', $request->getUrl(), $response->message));

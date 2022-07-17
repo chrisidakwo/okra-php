@@ -2,8 +2,7 @@
 
 namespace Okra\Http\Client;
 
-use GuzzleHttp\Exception\GuzzleException;
-use JsonException;
+use Okra\Exceptions\RequestFailed;
 use Okra\Http\Request\Contracts\HttpGetRequest;
 use Okra\Http\Request\Contracts\HttpPostRequest;
 
@@ -14,8 +13,7 @@ interface HttpClient
      *
      * @param HttpPostRequest $request
      * @return string
-     * @throws GuzzleException
-     * @throws JsonException
+     * @throws RequestFailed
      */
     public function post(HttpPostRequest $request): string;
 
@@ -24,7 +22,7 @@ interface HttpClient
      *
      * @param HttpGetRequest $request
      * @return string
-     * @throws GuzzleException
+     * @throws RequestFailed
      */
     public function get(HttpGetRequest $request): string;
 }

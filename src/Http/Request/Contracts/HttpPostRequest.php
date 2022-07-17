@@ -2,7 +2,7 @@
 
 namespace Okra\Http\Request\Contracts;
 
-use JsonException;
+use GuzzleHttp\Exception\InvalidArgumentException;
 
 interface HttpPostRequest
 {
@@ -29,7 +29,7 @@ interface HttpPostRequest
      * Returns the body (data) for the POST request.
      *
      * @return string
-     * @throws JsonException
+     * @throws InvalidArgumentException
      */
     public function getBody(): string;
 

@@ -2,8 +2,7 @@
 
 namespace Okra\Identity;
 
-use GuzzleHttp\Exception\GuzzleException;
-use JsonException;
+use Okra\Exceptions\RequestFailed;
 use Okra\Identity\BvnVerify\BvnVerifyRequest;
 use Okra\Identity\BvnVerify\BvnVerifyResponse;
 use Okra\Identity\Entities\CompanyVerification;
@@ -42,7 +41,7 @@ trait Identity
      * to retrieve the data.</p>
      *
      * @return array|null
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function fetchIdentities(): ?array
     {
@@ -59,7 +58,7 @@ trait Identity
      * @param int $limit
      * @param string|null $page
      * @return array
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function getIdentityById(string $id, int $limit = 10, string $page = null): array
     {
@@ -74,7 +73,7 @@ trait Identity
      * @param int $limit
      * @param string|null $page
      * @return array
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function getIdentityByDate(string $dateFrom, string $dateTo, int $limit = 10, string $page = null): array
     {
@@ -93,7 +92,7 @@ trait Identity
      * @param int $limit
      * @param string|null $page
      * @return array
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function getIdentityByCustomer(string $customerId, int $limit = 10, string $page = null): array
     {
@@ -111,7 +110,7 @@ trait Identity
      * @param int $limit
      * @param string|null $page
      * @return array
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function getIdentityByCustomerDate(string $customerId, string $startDate, string $endDate, int $limit = 10, string $page = null): array
     {
@@ -134,7 +133,7 @@ trait Identity
      *
      * @param string $bvn
      * @return Entities\Identity
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function bvnVerify(string $bvn): Entities\Identity
     {
@@ -156,7 +155,7 @@ trait Identity
      * @param string $acctNumber
      * @param string $bankId
      * @return Entities\Identity
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function nubanVerify(string $acctNumber, string $bankId): Entities\Identity
     {
@@ -178,7 +177,7 @@ trait Identity
      * @param string $acctNumber
      * @param string $bankId
      * @return Entities\Identity It holds on the name fields. Every other field is empty.
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function nubanNameVerify(string $acctNumber, string $bankId): Entities\Identity
     {
@@ -192,7 +191,7 @@ trait Identity
      *
      * @param string $customerId
      * @return Entities\Identity
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function verifyCustomer(string $customerId): Entities\Identity
     {
@@ -210,7 +209,7 @@ trait Identity
      * @param string $rcNumber
      * @param string $companyName
      * @return CompanyVerification
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function rcVerify(string $rcNumber, string $companyName): CompanyVerification
     {
@@ -231,7 +230,7 @@ trait Identity
      * @param string $tinNumber
      * @param string $companyName
      * @return CompanyVerification
-     * @throws GuzzleException|JsonException
+     * @throws RequestFailed
      */
     public function tinVerify(string $tinNumber, string $companyName): CompanyVerification
     {
@@ -250,8 +249,7 @@ trait Identity
      * @param string $tinNumber
      * @param string $companyName
      * @return CompanyVerification
-     * @throws GuzzleException
-     * @throws JsonException
+     * @throws RequestFailed
      */
     public function rcAndTinVerify(string $rcNumber, string $tinNumber, string $companyName): CompanyVerification
     {
